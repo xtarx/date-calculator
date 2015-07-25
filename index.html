@@ -17,7 +17,8 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
     <link rel="stylesheet" href="css/site.min.css">
     <!--    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,800,700,400italic,600italic,700italic,800italic,300italic" rel="stylesheet" type="text/css">-->
 
-    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">
+    <!--    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css">-->
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css" />
 
 
 </head>
@@ -46,27 +47,15 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
                 </div>
             </div>
         </nav>
-        <!--index-->
-        <div class="index">
-            <h1>
-          <img src="img/logo-index.png" alt="Bootflat: Advanced HTML5 Hybrid Mobile App Framework">
-        </h1>
-            <h2>BOOTFLAT is an open source Flat UI KIT based on Bootstrap 3.2.0 CSS framework. <br/>And, for the designers, we offer a <a href="free-psd.html">free PSD Download</a>. <br />It provides a faster, easier and less repetitive way for web developers or designers to create elegant web apps. </h2>
-            <h3>Compatible Browsers: IE8, IE9, IE10, IE11, Firefox, Safari, Opera, Chrome.</h3>
-
-            <p class="version-text">MIT Licensed - Version 2.0.4</p>
-
-            <p class="learn-more Bootflat">
-                <a href="#learn-more">Learn more <i class="icon" data-icon="&#xe035"></i></a>
-            </p>
-        </div>
 
         <!--desc-->
-        <div id="learn-more" class="desc container">
+        <div id="learn-more" class="desc container" ng-controller="DateCtrl">
             <div class="desc__introduces">
-                <h3>Designed for everyone, everywhere.</h3>
+                <h3>{{results}}</h3>
+                <input ui-date>
+
             </div>
-            <div class="desc__features" ng-controller="DateCtrl">
+            <div class="desc__features">
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label for="starting Date">starting Date (dd/mm/yyyy)</label>
@@ -75,63 +64,42 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
                     <div class="col-sm-4">
 
                         <label for="starting Date">OP</label>
-                        <select ng-model="selectedOperation" ng-options="operation.value for operation in operations" ng-change="operationChange()">
-
-
+                        <select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="operationChange()">
                         </select>
 
                     </div>
-                    <div class="col-sm-4">
-                        <label for="End Date">End Date</label>
-                        <input type="text" placeholder="to" class="date form-control" ng-model="toDate" ng-change="dateChange()">
+                    <div class="col-sm-4" ng-switch on="selectedOperation.type">
+                        <div ng-switch-when="date">
+                            <label for="End Date">End Date</label>
+                            <input type="text" class="date form-control" ng-model="toDate" ng-change="dateChange()">
+                        </div>
+
+                        <div ng-switch-when="days">
+                            <label for="Days">Days</label>
+                            <input type="text" placeholder="Number of days" class="form-control" ng-model="noDays" ng-change="dateChange()">
+                        </div>
+
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="features__photo"><img src="img/feature-bootstrap.png" /></div>
-                        <h4>Bootstrap 3.2.0</h4>
-                        <p>Bootflat is built on Bootstrap 3.2.0: the sleek, intuitive, and powerful mobile-first front-end framework for faster and easier web development.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="features__photo"><img src="img/feature-css.png" /></div>
-                        <h4>HTML5 &amp; CSS3</h4>
-                        <p>Bootflat's components are built with HTML5 and CSS3. The pages use `header`, `nav` and `section` to build the layout. Bootflat also comes with several splendid color schemes built-in, and allows for easy customization.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="features__photo"><img src="img/feature-lightweight.png" /></div>
-                        <h4>Lightweight</h4>
-                        <p>Bootflat uses lightweight high-function plugins for maximum performance, keeping CSS and JS file sizes down.</p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="features__photo"><img src="img/feature-mobile.png" /></div>
-                        <h4>Mobile first</h4>
-                        <p>Bootflat is fully responsive, built for mobile-first in mind. It provides off screen navigation, and almost all the widgets are compatible with all screen sizes.</p>
+
+
+
+            </div>
+            <!--footer-->
+            <div class="site-footer">
+                <div class="container">
+
+
+
+                    <hr class="dashed" />
+                    <div class="copyright clearfix">
+                        <p><b>Bootflat</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&bull;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&bull;&nbsp;<a href="free-psd.html">Free PSD</a>&nbsp;&bull;&nbsp;<a href="color-picker.html">Color Picker</a></p>
+                        <p>&copy; 2014 <a href="http://www.flathemes.com" target="_blank">FLATHEMES</a>, Inc. All rights reserved. &nbsp;&nbsp;Code licensed under <a href="http://opensource.org/licenses/mit-license.html" target="_blank" rel="external nofollow">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/" rel="external nofollow">CC BY 3.0</a>.</p>
                     </div>
                 </div>
             </div>
-            <div class="desc__introduces">
-                <h3>Bootflat UI Kit</h3>
-                <p>Bootflat UI Kit is PSD User Interface Pack including a set of beautiful and pure components, which you can use to create startup projects, websites or iOS/Android Apps. <a href="free-psd.html">Go to download it</a>.</p>
-                <div class="photo--responsive"><img src="img/bootflat-ui-kit.jpg" /></div>
-            </div>
+
         </div>
-        <!--footer-->
-        <div class="site-footer">
-            <div class="container">
-
-
-
-                <hr class="dashed" />
-                <div class="copyright clearfix">
-                    <p><b>Bootflat</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&bull;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&bull;&nbsp;<a href="free-psd.html">Free PSD</a>&nbsp;&bull;&nbsp;<a href="color-picker.html">Color Picker</a></p>
-                    <p>&copy; 2014 <a href="http://www.flathemes.com" target="_blank">FLATHEMES</a>, Inc. All rights reserved. &nbsp;&nbsp;Code licensed under <a href="http://opensource.org/licenses/mit-license.html" target="_blank" rel="external nofollow">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/" rel="external nofollow">CC BY 3.0</a>.</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
 
 </body>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
@@ -140,18 +108,29 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
 <script src="js/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript" src="js/site.min.js"></script>
-<script src="js/bootstrap-datepicker.min.js"></script>
+
 <script src="js/main.js"></script>
+
+
+
 <!-- Angular JS -->
 <script src="js/angular/angular.min.js"></script>
 <script src="js/angular/angular-resource.min.js"></script>
-
-
 <script src="js/angular/app.js"></script>
 <script src="js/angular/controllers/list.js"></script>
 <script src="js/angular/factories.js"></script>
-
 <!-- Angular JS -->
+
+<!-- angular UI-->
+<script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
+<!-- angular UI-->
+<!--moment JS-->
+<script src="js/moment.js"></script>
+<script src="js/angular/angular-moment.min.js"></script>
+<!--moment JS-->
+
+
 
 
 </html>

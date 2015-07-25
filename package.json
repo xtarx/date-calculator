@@ -59,5 +59,8 @@
     "tarball": "http://registry.npmjs.org/bootflat/-/bootflat-2.0.4.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/bootflat/-/bootflat-2.0.4.tgz"
+  "_resolved": "https://registry.npmjs.org/bootflat/-/bootflat-2.0.4.tgz",
+  "dependencies": {
+    "angular-moment": "^0.10.1"
+  }
 }

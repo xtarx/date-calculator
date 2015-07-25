@@ -18,15 +18,15 @@
     "bootflat/img/*"
   ],
   "keywords": [
-	"mobile",
-	"html5",
-	"css3",
-	"scss",
-	"bootflat",
-	"bootstrap",
-	"flat",
-	"flat ui",
-	"ui"
+    "mobile",
+    "html5",
+    "css3",
+    "scss",
+    "bootflat",
+    "bootstrap",
+    "flat",
+    "flat ui",
+    "ui"
   ],
   "license": "MIT",
   "ignore": [
@@ -40,5 +40,8 @@
     "index.html",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular-ui-date": "~0.0.8"
+  }
 }
