@@ -40,9 +40,6 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a class="nav-link" href="getting-started.html">Getting Started</a></li>
-                        <li><a class="nav-link" href="documentation.html">Documentation</a></li>
-                        <li><a class="nav-link" href="free-psd.html">Free PSD</a></li>
-                        <li><a class="nav-link" href="color-picker.html">Color Picker</a></li>
                     </ul>
                 </div>
             </div>
@@ -51,32 +48,38 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
         <!--desc-->
         <div id="learn-more" class="desc container" ng-controller="DateCtrl">
             <div class="desc__introduces">
+
                 <h3>{{results}}</h3>
-                <input ui-date>
+                <h3>{{myDate}}</h3>
+<!--                <timer  end-time="endDate">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>-->
 
             </div>
             <div class="desc__features">
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label for="starting Date">starting Date (dd/mm/yyyy)</label>
-                        <input type="text" placeholder="from" class="date form-control" ng-model="fromDate" ng-change="dateChange()">
+
+                        <input placeholder="from" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
+
                     </div>
                     <div class="col-sm-4">
 
                         <label for="starting Date">OP</label>
-                        <select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="operationChange()">
+                        <select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="dateChange()">
                         </select>
 
                     </div>
                     <div class="col-sm-4" ng-switch on="selectedOperation.type">
                         <div ng-switch-when="date">
                             <label for="End Date">End Date</label>
-                            <input type="text" class="date form-control" ng-model="toDate" ng-change="dateChange()">
+                            <input placeholder="to" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="$parent.toDate" ng-change="dateChange()"   >
+
                         </div>
 
                         <div ng-switch-when="days">
                             <label for="Days">Days</label>
-                            <input type="text" placeholder="Number of days" class="form-control" ng-model="noDays" ng-change="dateChange()">
+                            <input type="number" placeholder="Number of days" class="form-control" ng-model="$parent.noDays" ng-change="dateChange()">
+
                         </div>
 
                     </div>
@@ -85,21 +88,19 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
 
 
             </div>
-            <!--footer-->
-            <div class="site-footer">
-                <div class="container">
-
-
-
-                    <hr class="dashed" />
-                    <div class="copyright clearfix">
-                        <p><b>Bootflat</b>&nbsp;&nbsp;&nbsp;&nbsp;<a href="getting-started.html">Getting Started</a>&nbsp;&bull;&nbsp;<a href="documentation.html">Documentation</a>&nbsp;&bull;&nbsp;<a href="free-psd.html">Free PSD</a>&nbsp;&bull;&nbsp;<a href="color-picker.html">Color Picker</a></p>
-                        <p>&copy; 2014 <a href="http://www.flathemes.com" target="_blank">FLATHEMES</a>, Inc. All rights reserved. &nbsp;&nbsp;Code licensed under <a href="http://opensource.org/licenses/mit-license.html" target="_blank" rel="external nofollow">MIT License</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/" rel="external nofollow">CC BY 3.0</a>.</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
+        <!--footer-->
+        <div class="site-footer">
+            <div class="container">
+
+
+
+                <hr class="dashed" />
+
+            </div>
+        </div>
+
+    </div>
 
 </body>
 <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
@@ -108,7 +109,6 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
 <script src="js/respond.min.js"></script>
 <![endif]-->
 <script type="text/javascript" src="js/site.min.js"></script>
-
 <script src="js/main.js"></script>
 
 
@@ -125,10 +125,12 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
 <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
 <!-- angular UI-->
-<!--moment JS-->
-<script src="js/moment.js"></script>
-<script src="js/angular/angular-moment.min.js"></script>
-<!--moment JS-->
+<!--AngularTimer JS-->
+<script src="bower_components/momentjs/min/moment.min.js"></script>
+<script src="bower_components/momentjs/min/locales.min.js"></script>
+<script src="bower_components/humanize-duration/humanize-duration.js"></script>
+<script src="bower_components/angular-timer/dist/angular-timer.min.js"></script>
+<!--AngularTimer JS-->
 
 
 

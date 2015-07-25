@@ -1,6 +1,6 @@
   'use strict';
 
-var app = angular.module('dateCounter', ['ngResource', 'angularMoment','ui.date']);
+var app = angular.module('dateCounter', ['ngResource','ui.date','timer']);
 
   //angular.module('dateCounter').constant('angularMomentConfig', {
   //    preprocess: 'unix ', // optional
@@ -14,3 +14,5 @@ var app = angular.module('dateCounter', ['ngResource', 'angularMoment','ui.date'
           return $filter('date')(tempdate, "dd/MM 'at' h:mma");
       }
   });
+// TODO: styling.
+// TODO: add background image.
