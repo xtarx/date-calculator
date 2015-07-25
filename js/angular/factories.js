@@ -58,6 +58,21 @@ app.factory('subtractDays', [function () {
 app.factory('dateDiffrence', [function ($filter, moment, amMoment, angularMomentConfig) {
     return {
         name: 'dateDiffrence',
+
+        dateDiff: function (datepart, fromdate, todate) {
+            datepart = datepart.toLowerCase();
+            var diff = todate - fromdate;
+            var divideBy = {
+                w: 604800000,
+                d: 86400000,
+                h: 3600000,
+                m: 60000,
+                s: 1000
+            };
+
+            return Math.floor(diff / divideBy[datepart]);
+        },
+
         calculate: function (startDate, endDate) {
 
             var splittedStartDate = startDate.split('/');
@@ -66,17 +81,19 @@ app.factory('dateDiffrence', [function ($filter, moment, amMoment, angularMoment
             var startDate = new Date(splittedStartDate[2], splittedStartDate[1] - 1, splittedStartDate[0]);
             var endDate = new Date(splittedEndDate[2], splittedEndDate[1] - 1, splittedEndDate[0]);
 
-            var miliseconds = endDate - startDate;
-            var seconds = miliseconds / 1000;
-            var minutes = seconds / 60;
-            var hours = minutes / 60;
-            var days = hours / 24;
 
-            
-//            var person = {firstName:"John", lastName:"Doe", age:46};
 
-            return days;
-//            return miliseconds;
+            var date = {
+                type:'date',
+                weeks: this.dateDiff('w', startDate, endDate),
+                days: this.dateDiff('d', startDate, endDate),
+                hours: this.dateDiff('h', startDate, endDate),
+                minutes: this.dateDiff('m', startDate, endDate),
+                seconds: this.dateDiff('s', startDate, endDate)
+            };
+
+            console.log(date);
+            return date;
 
             //now
             //            var now = new Date();
@@ -97,10 +114,6 @@ app.factory('dateDiffrence', [function ($filter, moment, amMoment, angularMoment
             //            return newEndDate/1000;
 
             //if date is after Today, then enddate is fromtoday-enddate - fromtoday-startDate
-
-
-
-
 
         },
 

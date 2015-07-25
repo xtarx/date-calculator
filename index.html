@@ -49,36 +49,55 @@ And, for the designers, we offer a free PSD Download. It provides a faster, easi
         <div id="learn-more" class="desc container" ng-controller="DateCtrl">
             <div class="desc__introduces">
 
-                <h3>{{results}}</h3>
-                <h3>{{myDate}}</h3>
-<!--                <timer  end-time="endDate">{{days}} days, {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds.</timer>-->
+                <div class="alert alert-success" ng-if="results">
+
+
+                    <div ng-switch on="isDiff">
+                        <div ng-switch-when="true">
+                            <div class="row">
+                                <p>In {{results.days}} Days </p>
+                            </div>
+                            <div class="row">
+                                <span class="text-muted">which is equivlent to:</span>
+                            </div>
+                            <div class="row">
+                                <p>{{results.weeks}} Weeks </p>
+                                <p>{{results.weeks}} Weeks </p>
+                                <p>{{results.weeks}} Weeks </p>
+                            </div>
+                        </div>
+                        <div ng-switch-when="false">
+                            {{results| date:'medium'}}
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
             <div class="desc__features">
                 <div class="row">
                     <div class="form-group col-sm-4">
                         <label for="starting Date">starting Date (dd/mm/yyyy)</label>
-
-                        <input placeholder="from" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
+                        <input required placeholder="from" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
 
                     </div>
                     <div class="col-sm-4">
 
                         <label for="starting Date">OP</label>
-                        <select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="dateChange()">
+                        <select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="operationChange()">
                         </select>
 
                     </div>
                     <div class="col-sm-4" ng-switch on="selectedOperation.type">
                         <div ng-switch-when="date">
                             <label for="End Date">End Date</label>
-                            <input placeholder="to" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="$parent.toDate" ng-change="dateChange()"   >
+                            <input required placeholder="to" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="$parent.toDate" ng-change="dateChange()">
 
                         </div>
 
                         <div ng-switch-when="days">
                             <label for="Days">Days</label>
-                            <input type="number" placeholder="Number of days" class="form-control" ng-model="$parent.noDays" ng-change="dateChange()">
+                            <input required type="number" max="10000" min="1" placeholder="Number of days" class="form-control" ng-model="$parent.noDays" ng-change="dateChange()">
 
                         </div>
 

@@ -14,5 +14,9 @@ var app = angular.module('dateCounter', ['ngResource','ui.date','timer']);
           return $filter('date')(tempdate, "dd/MM 'at' h:mma");
       }
   });
-// TODO: styling.
+// TODO: Diffrence in weeks, months if possible.
+// TODO: validation.
+// TODO: run only after blue by 1 sec.
+// TODO: result date format.
+// TODO: countdown.
 // TODO: add background image.
