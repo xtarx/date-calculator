@@ -8,23 +8,40 @@
         <link rel="bookmark" href="favicon_16.ico" />
         
         <!-- site css -->
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600" rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css" />
+        <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="css/nigran.datepicker.css">
+        <link rel="stylesheet" href="css/main.css">
     </head>
 
-    <body class="home" ng-app="dateCounter">
-        <div class="desc container" ng-controller="DateCtrl">
+    <body ng-app="dateCounter">
+
+        <div class="desc container date-calculator" ng-controller="DateCtrl">
+            <div class="logo text-center">
+                <img src="img/clock.png" width="180">
+            </div>
 
             <div class="row">
                 <div class="form-group col-sm-4">
-                    <label for="starting Date">starting Date (dd/mm/yyyy)</label>
-                    <input required placeholder="from" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
+                    <label for="starting Date">Starting Date (mm/dd/yyyy)</label>
+                    <input required placeholder="from" class="date form-control ll-skin-nigran" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
                 </div>
                 <div class="col-sm-4">
-                    <label for="starting Date">OP</label>
-                    <select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="operationChange()">
-                    </select>
+                    <label for="starting Date">Operation</label>
+
+                    <!--=========================================================================-->
+                    <!-- REPLACED THE SELECT TAG WITH ROUND BUTTONS, THEY ARE NOT FUNCTIONAL YET -->
+                    <!--=========================================================================-->
+
+                    <!-- <div><select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="operationChange()"></select></div> -->
+                    <div class="operations">
+                        <span class="add circle-icon selected" data-toggle="tooltip" data-placement="bottom" title="Add">+</span>
+                        /
+                        <span class="subtract circle-icon" data-toggle="tooltip" data-placement="bottom" title="Subtract">-</span>
+                        /
+                        <span class="difference circle-icon" data-toggle="tooltip" data-placement="bottom" title="Difference">_</span>
+                    </div>
                 </div>
                 <div class="col-sm-4" ng-switch on="selectedOperation.type">
                     <div ng-switch-when="date">
@@ -39,19 +56,17 @@
                 </div>
             </div>
 
-            <div class="alert alert-success" ng-if="results">
-                <div ng-switch on="isDiff">
-                    <div ng-switch-when="true">
-                        <div class="row">
-                            <p>In {{results.days}} Days </p>
+            <div class="row" ng-if="results">
+                <div class="col-sm-8 col-sm-offset-2 results-container" ng-switch on="isDiff">
+                    <div class="row" ng-switch-when="true">
+                        <div class="col-sm-6">
+                            <p>In {{results.days}} Days</p>
                         </div>
-                        <div class="row">
-                            <span class="text-muted">which is equivlent to:</span>
-                        </div>
-                        <div class="row">
-                            <p>{{results.weeks}} Weeks </p>
-                            <p>{{results.weeks}} Weeks </p>
-                            <p>{{results.weeks}} Weeks </p>
+                        <div class="col-sm-6">
+                            <p>which is equivlent to:</p>
+                            <p class="sml-txt">{{results.weeks}} Weeks</p>
+                            <p class="sml-txt">{{results.weeks}} Weeks</p>
+                            <p class="sml-txt">{{results.weeks}} Weeks</p>
                         </div>
                     </div>
                     <div ng-switch-when="false">
@@ -86,6 +101,5 @@
     <script src="bower_components/humanize-duration/humanize-duration.js"></script>
     <script src="bower_components/angular-timer/dist/angular-timer.min.js"></script>
     <!--AngularTimer JS-->
-
 
 </html>

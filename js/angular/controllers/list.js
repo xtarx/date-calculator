@@ -63,8 +63,6 @@
                     $scope.results = operationToPerform.calculate($scope.fromDate, $scope.toDate);
                     break;
             }
-
-
         }
 
 
