@@ -17,22 +17,24 @@
 </head>
 
 <body ng-app="dateCounter">
-
+    <!--------DateCalc DIV Start--------->
     <div class="desc container date-calculator" ng-controller="DateCtrl">
         <div class="logo text-center">
             <img src="img/clock.png" width="160">
         </div>
 
+        <!--------INPUT BOX  START--------->
         <div class="row">
             <div class="form-group col-sm-4">
                 <label for="starting Date">Starting Date (mm/dd/yyyy)</label>
                 <input required placeholder="from" class="date form-control ll-skin-nigran" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
             </div>
-            <div class="col-sm-4">
+
+            <!----OPERATIONS START-->
+            <div class="col-sm-4 text-center">
                 <label for="starting Date">Operation</label>
 
                 <div class="operations">
-
                     <span class="add circle-icon" data-toggle="tooltip" data-placement="bottom" title="Add" ng-class="{selected:selectedOperation.value==='add'}" ng-click="operationChange(operations[0])">+</span> /
 
 
@@ -41,33 +43,55 @@
 
                     <span class="difference circle-icon" data-toggle="tooltip" data-placement="bottom" title="Difference" ng-class="{selected:selectedOperation.value==='diff'}" ng-click="operationChange(operations[2])">_</span>
                 </div>
+
             </div>
+            <!----OPERATIONS END-->
+
+            <!----INPUT FIELD 2  DATE OR NUMERIC VALUES START-->
             <div class="col-sm-4" ng-switch on="selectedOperation.type">
                 <div ng-switch-when="date">
-                    <label for="End Date">End Date (mm/dd/yyyy)</label>
+                    <label for="End Date">End Date </label>
                     <input required placeholder="to" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="$parent.toDate" ng-change="dateChange()">
                 </div>
 
-                <div ng-switch-when="days">
-                    <div class="days">
-                        <label for="Days">Days</label>
-                        <input required type="number" max="10000" min="1" placeholder="Number of days" class="form-control" ng-model="$parent.noDays" ng-change="dateChange()">
+                <!----DATE NUMERIC INPUTS START-->
+                <div class="row" ng-switch-when="days">
+
+                    <div class="col-sm-3">
+                        <div class="days">
+                            <label for="Days">Days</label>
+                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noDays" ng-change="dateChange()">
+                        </div>
                     </div>
-                    <div class="weeks">
-                        <label for="weeks">Weeks</label>
-                        <input required type="number" max="10000" min="1" placeholder="Number of weeks" class="form-control" ng-model="$parent.noWeeks" ng-change="dateChange()">
+
+                    <div class="col-sm-3">
+                        <div class="weeks">
+                            <label for="weeks">Weeks</label>
+                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noWeeks" ng-change="dateChange()">
+                        </div>
                     </div>
-                    <div class="months">
-                        <label for="months">Months</label>
-                        <input required type="number" max="10000" min="1" placeholder="Number of months" class="form-control" ng-model="$parent.noMonths" ng-change="dateChange()">
+
+                    <div class="col-sm-3">
+                        <div class="months">
+                            <label for="months">Months</label>
+                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noMonths" ng-change="dateChange()">
+                        </div>
                     </div>
-                    <div class="years">
-                        <label for="years">Years</label>
-                        <input required type="number" max="10000" min="1" placeholder="Number of years" class="form-control" ng-model="$parent.noYears" ng-change="dateChange()">
+
+                    <div class="col-sm-3">
+                        <div class="years">
+                            <label for="years">Years</label>
+                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noYears" ng-change="dateChange()">
+                        </div>
                     </div>
+
                 </div>
+                <!----DATE NUMERIC INPUTS END-->
             </div>
+            <!----INPUT FIELD 2  DATE OR NUMERIC VALUES END-->
         </div>
+
+        <!--------INPUT BOX END--------->
         <!--------RESULTS DIV START--------->
         <div class="row" ng-if="results">
             <div class="col-sm-8 col-sm-offset-2 results-container" ng-switch on="isDiff">
@@ -76,7 +100,8 @@
                         <p>In <strong>{{results.days}}</strong> Days</p>
                     </div>
                     <div class="col-sm-6">
-                        <p>which is equivlent to:</p>
+                        <p>Which is equivalent to:</p>
+
                         <p class="sml-txt">{{results.weeks}} Weeks</p>
                         <p class="sml-txt">{{results.hours}} Hours</p>
                         <p class="sml-txt">{{results.minutes}} Minutes</p>
@@ -92,6 +117,8 @@
         <!--------RESULTS DIV END--------->
 
     </div>
+    <!--------DateCalc DIV END--------->
+
 </body>
 
 

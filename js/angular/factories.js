@@ -92,8 +92,6 @@ app.factory('dateDiffrence', [function ($filter, moment, amMoment, angularMoment
             var startDate = new Date(splittedStartDate[2], splittedStartDate[1] - 1, splittedStartDate[0]);
             var endDate = new Date(splittedEndDate[2], splittedEndDate[1] - 1, splittedEndDate[0]);
 
-
-
             var date = {
                 type: 'date',
                 weeks: this.dateDiff('w', startDate, endDate),
@@ -105,26 +103,6 @@ app.factory('dateDiffrence', [function ($filter, moment, amMoment, angularMoment
 
             console.log(date);
             return date;
-
-            //now
-            //            var now = new Date();
-            //            var startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            //            //            var nowTimestamp = startOfDay / 1000;
-            //            var nowTimestamp = startOfDay;
-            //
-            //            //if date is before Today, then enddate is fromtoday-enddate + fromtoday-startDate
-            //            //            startDate  endDate
-            //            console.log('from date ' + startDate);
-            //            console.log('end date ' + endDate);
-            //            console.log('now date ' + nowTimestamp);
-            //            var newEndDateTimeStamp = (endDate - startDate) + (nowTimestamp - startDate);
-            //            var newEndDate = new Date();
-            //            newEndDate.setTime(nowTimestamp.getTime() + (newEndDateTimeStamp));
-            //            console.log('newEndDate ' + newEndDate);
-            //            console.log('newEndDate ' + newEndDate/1000);
-            //            return newEndDate/1000;
-
-            //if date is after Today, then enddate is fromtoday-enddate - fromtoday-startDate
 
         },
 

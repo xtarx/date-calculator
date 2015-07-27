@@ -3,19 +3,12 @@
     var app = angular.module('dateCounter');
     app.controller('DateCtrl', ['$scope', '$filter', 'OperationTypes', 'numericDateOperation', 'dateDiffrence', function ($scope, $filter, OperationTypes, numericDateOperation, dateDiffrence) {
 
-
-        
         $scope.operations = OperationTypes.query();
         $scope.selectedOperation = $scope.operations[0];
-        $scope.isDiff = false;
-        $scope.fromDate = $filter('date')(new Date(), 'dd/MM/yyyy');
-        $scope.endDate;
+        init();
 
 
-
-        $scope.operationChange = function (operation) {
-
-            $scope.selectedOperation = operation;
+        function init() {
             $scope.results = '';
             $scope.fromDate = $filter('date')(new Date(), 'dd/MM/yyyy');
             $scope.toDate = "";
@@ -24,6 +17,11 @@
             $scope.noMonths = '';
             $scope.noYears = '';
             $scope.isDiff = false;
+        }
+        $scope.operationChange = function (operation) {
+
+            $scope.selectedOperation = operation;
+            init();
             $scope.dateChange();
         }
 
