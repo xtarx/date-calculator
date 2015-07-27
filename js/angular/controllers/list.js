@@ -1,23 +1,27 @@
     'use strict';
 
     var app = angular.module('dateCounter');
-    app.controller('DateCtrl', ['$scope', '$filter', 'OperationTypes', 'addDays', 'subtractDays', 'dateDiffrence', function ($scope, $filter, OperationTypes, addDays, subtractDays, dateDiffrence) {
+    app.controller('DateCtrl', ['$scope', '$filter', 'OperationTypes', 'numericDateOperation', 'dateDiffrence', function ($scope, $filter, OperationTypes, numericDateOperation, dateDiffrence) {
 
         //        $scope.errors = {};
         $scope.results = '';
         $scope.operations = OperationTypes.query();
-        $scope.selectedOperation = $scope.operations[2];
+        $scope.selectedOperation = $scope.operations[0];
         $scope.isDiff = false;
         $scope.fromDate = $filter('date')(new Date(), 'dd/MM/yyyy');
-        //        $scope.toDate = $filter('date')(new Date(), 'dd/MM/yyyy');
         $scope.endDate;
 
 
 
-        $scope.operationChange = function () {
+        $scope.operationChange = function (operation) {
+
+            $scope.selectedOperation = operation;
+
+            console.log("selected op  " + $scope.selectedOperation.value);
+            console.log("selected op type " + $scope.selectedOperation.type);
             $scope.results = '';
             $scope.fromDate = $filter('date')(new Date(), 'dd/MM/yyyy');
-            $scope.noDays='';
+            $scope.noDays = '';
             $scope.dateChange();
         }
 
@@ -30,21 +34,21 @@
             $scope.results = '';
             var operationToPerform;
             switch ($scope.selectedOperation.value) {
-                
+
 
                 case 'add':
-                    if (!$scope.noDays || !$scope.fromDate) {
+                    if (!$scope.fromDate) {
                         return false;
                     }
-                    operationToPerform = addDays;
-                    $scope.results = operationToPerform.calculate($scope.fromDate, $scope.noDays);
+                    operationToPerform = numericDateOperation;
+                    $scope.results = operationToPerform.calculate(true, $scope.fromDate, $scope.noDays, $scope.noWeeks, $scope.noMonths, $scope.noYears);
                     break;
                 case 'sub':
-                    if (!$scope.noDays || !$scope.fromDate) {
+                    if (!$scope.fromDate) {
                         return false;
                     }
-                    operationToPerform = subtractDays;
-                    $scope.results = operationToPerform.calculate($scope.fromDate, $scope.noDays);
+                    operationToPerform = numericDateOperation;
+                    $scope.results = operationToPerform.calculate(false, $scope.fromDate, $scope.noDays, $scope.noWeeks, $scope.noMonths, $scope.noYears);
                     break;
                 case 'diff':
                     if (!$scope.fromDate || !$scope.toDate) {

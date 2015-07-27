@@ -28,33 +28,44 @@ angular.module('dateCounter')
         }
     });
 
-app.factory('addDays', [function () {
+app.factory('numericDateOperation', [function () {
     return {
-        name: 'addDays',
-        calculate: function (startDate, days) {
-            console.log(this.name + " was called with " + startDate + " and " + days);
+        name: 'numericDateOperation',
+        calculate: function (addOperation, startDate, days, weeks, months, years) {
             var splittedDate = startDate.split('/');
             var startDate = new Date(splittedDate[2], splittedDate[1], splittedDate[0]);
             var newDate = new Date();
-            newDate.setDate(startDate.getDate() + parseInt(days, 10));
+            var totalTimetoAdd = 0;
+
+            if (days) {
+                //add days
+                totalTimetoAdd += parseInt(days, 10);
+            }
+            if (weeks) {
+                //add weeks
+                totalTimetoAdd += parseInt(weeks, 10) * 7;
+            }
+            if (months) {
+                //add months
+                totalTimetoAdd += parseInt(months, 10) * 30;
+            }
+            if (years) {
+                //add years
+                totalTimetoAdd += parseInt(years, 10) * 365;
+            }
+
+            if (addOperation) {
+                newDate.setDate(startDate.getDate() + totalTimetoAdd);
+            } else {
+
+                newDate.setDate(startDate.getDate() - totalTimetoAdd);
+            }
             return newDate;
         },
 
     };
 }]);
-app.factory('subtractDays', [function () {
-    return {
-        name: 'subtractDays',
-        calculate: function (startDate, days) {
-            var splittedDate = startDate.split('/');
-            var startDate = new Date(splittedDate[2], splittedDate[1], splittedDate[0]);
-            var newDate = new Date();
-            newDate.setDate(startDate.getDate() - days);
-            return newDate;
-        },
 
-    };
-}]);
 app.factory('dateDiffrence', [function ($filter, moment, amMoment, angularMomentConfig) {
     return {
         name: 'dateDiffrence',
@@ -84,7 +95,7 @@ app.factory('dateDiffrence', [function ($filter, moment, amMoment, angularMoment
 
 
             var date = {
-                type:'date',
+                type: 'date',
                 weeks: this.dateDiff('w', startDate, endDate),
                 days: this.dateDiff('d', startDate, endDate),
                 hours: this.dateDiff('h', startDate, endDate),
