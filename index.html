@@ -31,11 +31,6 @@
             <div class="col-sm-4">
                 <label for="starting Date">Operation</label>
 
-                <!--=========================================================================-->
-                <!-- REPLACED THE SELECT TAG WITH ROUND BUTTONS, THEY ARE NOT FUNCTIONAL YET -->
-                <!--=========================================================================-->
-
-                <!-- <div><select ng-model="selectedOperation" ng-options="operation.name for operation in operations" ng-change="operationChange()"></select></div> -->
                 <div class="operations">
 
                     <span class="add circle-icon" data-toggle="tooltip" data-placement="bottom" title="Add" ng-class="{selected:selectedOperation.value==='add'}" ng-click="operationChange(operations[0])">+</span> /
@@ -49,7 +44,7 @@
             </div>
             <div class="col-sm-4" ng-switch on="selectedOperation.type">
                 <div ng-switch-when="date">
-                    <label for="End Date">End Date</label>
+                    <label for="End Date">End Date (mm/dd/yyyy)</label>
                     <input required placeholder="to" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="$parent.toDate" ng-change="dateChange()">
                 </div>
 
@@ -73,25 +68,28 @@
                 </div>
             </div>
         </div>
-
+        <!--------RESULTS DIV START--------->
         <div class="row" ng-if="results">
             <div class="col-sm-8 col-sm-offset-2 results-container" ng-switch on="isDiff">
                 <div class="row" ng-switch-when="true">
                     <div class="col-sm-6">
-                        <p>In {{results.days}} Days</p>
+                        <p>In <strong>{{results.days}}</strong> Days</p>
                     </div>
                     <div class="col-sm-6">
                         <p>which is equivlent to:</p>
                         <p class="sml-txt">{{results.weeks}} Weeks</p>
-                        <p class="sml-txt">{{results.weeks}} Weeks</p>
-                        <p class="sml-txt">{{results.weeks}} Weeks</p>
+                        <p class="sml-txt">{{results.hours}} Hours</p>
+                        <p class="sml-txt">{{results.minutes}} Minutes</p>
                     </div>
                 </div>
                 <div ng-switch-when="false">
-                    {{results| date:'mediumDate'}}
+                    <div class="row text-center">
+                        <h2>{{results| date:'mediumDate'}}</h2>
+                    </div>
                 </div>
             </div>
         </div>
+        <!--------RESULTS DIV END--------->
 
     </div>
 </body>
@@ -113,11 +111,5 @@
 <script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
 <!-- angular UI-->
 
-<!--AngularTimer JS-->
-<script src="bower_components/momentjs/min/moment.min.js"></script>
-<script src="bower_components/momentjs/min/locales.min.js"></script>
-<script src="bower_components/humanize-duration/humanize-duration.js"></script>
-<script src="bower_components/angular-timer/dist/angular-timer.min.js"></script>
-<!--AngularTimer JS-->
 
 </html>

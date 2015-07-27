@@ -1,6 +1,6 @@
   'use strict';
 
-var app = angular.module('dateCounter', ['ngResource','ui.date','timer']);
+var app = angular.module('dateCounter', ['ngResource','ui.date']);
 
   //angular.module('dateCounter').constant('angularMomentConfig', {
   //    preprocess: 'unix ', // optional
@@ -14,9 +14,9 @@ var app = angular.module('dateCounter', ['ngResource','ui.date','timer']);
           return $filter('date')(tempdate, "dd/MM 'at' h:mma");
       }
   });
-// TODO: Diffrence in weeks, months if possible.
-// TODO: validation.
+// TODO:[x] Diffrence in weeks, months if possible.
+// TODO:[x] validation.
 // TODO: run only after blue by 1 sec.
 // TODO: result date format.
 // TODO: countdown.
-// TODO: add background image.
+// TODO:[x] add background image.
