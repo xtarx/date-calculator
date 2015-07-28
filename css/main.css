@@ -14,9 +14,14 @@ body {
     /* Opera 11.10+ */
     background: linear-gradient(90deg, #085078 10%, #85D8CE 90%);
     /* W3C */
+    padding: 0 20px;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 .logo {
-    margin: 70px 0 85px 0;
+    margin: 90px 0 90px 0;
 }
 .date-calculator label {
     color: #fff;
@@ -79,4 +84,22 @@ body {
 }
 .results-container .sml-txt {
     font-size: 14px;
+}
+.copyright-footer {
+    font-size: 11px;
+    position: absolute;
+    padding: 5px 30px;
+    bottom: 0;
+    right: 0;
+}
+.copyright-footer,
+.copyright-footer a {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 600px) { 
+  .date-calculator {
+      position: relative;
+      padding-bottom: 25px;
+  }
 }

@@ -1,142 +1,145 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Date Calculator</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="Date Calculator">
+        <meta name="author" content="XtarX">
+        <link rel="shortcut icon" href="favicon_16.ico" />
+        <link rel="bookmark" href="favicon_16.ico" />
 
-<head>
-    <meta charset="utf-8">
-    <title>Date Calculator</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="shortcut icon" href="favicon_16.ico" />
-    <link rel="bookmark" href="favicon_16.ico" />
+        <!-- site css -->
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="css/nigran.datepicker.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
 
-    <!-- site css -->
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="bower_components/jquery-ui/themes/smoothness/jquery-ui.css">
-    <link rel="stylesheet" href="css/nigran.datepicker.css">
-    <link rel="stylesheet" href="css/main.css">
-</head>
+    <body ng-app="dateCounter">
+        
+        <!-- DateCalc DIV Start -->
+        <div class="desc container date-calculator" ng-controller="DateCtrl">
+            <div class="logo text-center">
+                <img src="img/logo.png" width="160">
+            </div>
 
-<body ng-app="dateCounter">
-    <!--------DateCalc DIV Start--------->
-    <div class="desc container date-calculator" ng-controller="DateCtrl">
-        <div class="logo text-center">
-            <img src="img/clock.png" width="160">
+            <!-- INPUT BOX  START -->
+            <div class="row">
+                <div class="form-group col-sm-4">
+                    <label for="starting Date">Starting Date (mm/dd/yyyy)</label>
+                    <input required placeholder="from" class="date form-control ll-skin-nigran" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
+                </div>
+
+                <!-- OPERATIONS START -->
+                <div class="col-sm-4 text-center">
+                    <label for="starting Date">Operation</label>
+
+                    <div class="operations">
+                        <span class="add circle-icon" data-toggle="tooltip" data-placement="bottom" title="Add" ng-class="{selected:selectedOperation.value==='add'}" ng-click="operationChange(operations[0])">+</span> /
+
+                        <span class="subtract circle-icon" data-toggle="tooltip" data-placement="bottom" title="Subtract" ng-class="{selected:selectedOperation.value==='sub'}" ng-click="operationChange(operations[1])">-</span> /
+
+                        <span class="difference circle-icon" data-toggle="tooltip" data-placement="bottom" title="Difference" ng-class="{selected:selectedOperation.value==='diff'}" ng-click="operationChange(operations[2])">_</span>
+                    </div>
+
+                </div>
+                <!--OPERATIONS END-->
+
+                <!--INPUT FIELD 2  DATE OR NUMERIC VALUES START-->
+                <div class="col-sm-4" ng-switch on="selectedOperation.type">
+                    <div ng-switch-when="date">
+                        <label for="End Date">End Date </label>
+                        <input required placeholder="to" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="$parent.toDate" ng-change="dateChange()">
+                    </div>
+
+                    <!--DATE NUMERIC INPUTS START-->
+                    <div class="row" ng-switch-when="days">
+
+                        <div class="col-sm-3">
+                            <div class="days">
+                                <label for="Days">Days</label>
+                                <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noDays" ng-change="dateChange()">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="weeks">
+                                <label for="weeks">Weeks</label>
+                                <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noWeeks" ng-change="dateChange()">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="months">
+                                <label for="months">Months</label>
+                                <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noMonths" ng-change="dateChange()">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="years">
+                                <label for="years">Years</label>
+                                <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noYears" ng-change="dateChange()">
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--DATE NUMERIC INPUTS END-->
+                </div>
+                <!--INPUT FIELD 2  DATE OR NUMERIC VALUES END-->
+            </div>
+            <!--INPUT BOX END-->
+
+
+            <!--RESULTS DIV START-->
+            <div class="row" ng-if="results">
+                <div class="col-sm-8 col-sm-offset-2 results-container" ng-switch on="isDiff">
+                    <div class="row" ng-switch-when="true">
+                        <div class="col-sm-6">
+                            <p>In <strong>{{results.days}}</strong> Days</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>Which is equivalent to:</p>
+
+                            <p class="sml-txt">{{results.weeks}} Weeks</p>
+                            <p class="sml-txt">{{results.hours}} Hours</p>
+                            <p class="sml-txt">{{results.minutes}} Minutes</p>
+                        </div>
+                    </div>
+                    <div ng-switch-when="false">
+                        <div class="row text-center">
+                            <h2>{{results| date:'mediumDate'}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--RESULTS DIV END-->
+
+            <div class="copyright-footer pull-right">Icons made by <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></div>
         </div>
-
-        <!--------INPUT BOX  START--------->
-        <div class="row">
-            <div class="form-group col-sm-4">
-                <label for="starting Date">Starting Date (mm/dd/yyyy)</label>
-                <input required placeholder="from" class="date form-control ll-skin-nigran" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
-            </div>
-
-            <!----OPERATIONS START-->
-            <div class="col-sm-4 text-center">
-                <label for="starting Date">Operation</label>
-
-                <div class="operations">
-                    <span class="add circle-icon" data-toggle="tooltip" data-placement="bottom" title="Add" ng-class="{selected:selectedOperation.value==='add'}" ng-click="operationChange(operations[0])">+</span> /
+        <!--DateCalc DIV END-->
 
 
-                    <span class="subtract circle-icon" data-toggle="tooltip" data-placement="bottom" title="Subtract" ng-class="{selected:selectedOperation.value==='sub'}" ng-click="operationChange(operations[1])">-</span> /
-
-
-                    <span class="difference circle-icon" data-toggle="tooltip" data-placement="bottom" title="Difference" ng-class="{selected:selectedOperation.value==='diff'}" ng-click="operationChange(operations[2])">_</span>
-                </div>
-
-            </div>
-            <!----OPERATIONS END-->
-
-            <!----INPUT FIELD 2  DATE OR NUMERIC VALUES START-->
-            <div class="col-sm-4" ng-switch on="selectedOperation.type">
-                <div ng-switch-when="date">
-                    <label for="End Date">End Date </label>
-                    <input required placeholder="to" class="date form-control" ui-date ui-date-format="dd/mm/yy" ng-model="$parent.toDate" ng-change="dateChange()">
-                </div>
-
-                <!----DATE NUMERIC INPUTS START-->
-                <div class="row" ng-switch-when="days">
-
-                    <div class="col-sm-3">
-                        <div class="days">
-                            <label for="Days">Days</label>
-                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noDays" ng-change="dateChange()">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="weeks">
-                            <label for="weeks">Weeks</label>
-                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noWeeks" ng-change="dateChange()">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="months">
-                            <label for="months">Months</label>
-                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noMonths" ng-change="dateChange()">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div class="years">
-                            <label for="years">Years</label>
-                            <input required type="number" max="10000" min="1" placeholder="0" class="form-control" ng-model="$parent.noYears" ng-change="dateChange()">
-                        </div>
-                    </div>
-
-                </div>
-                <!----DATE NUMERIC INPUTS END-->
-            </div>
-            <!----INPUT FIELD 2  DATE OR NUMERIC VALUES END-->
-        </div>
-
-        <!--------INPUT BOX END--------->
-        <!--------RESULTS DIV START--------->
-        <div class="row" ng-if="results">
-            <div class="col-sm-8 col-sm-offset-2 results-container" ng-switch on="isDiff">
-                <div class="row" ng-switch-when="true">
-                    <div class="col-sm-6">
-                        <p>In <strong>{{results.days}}</strong> Days</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p>Which is equivalent to:</p>
-
-                        <p class="sml-txt">{{results.weeks}} Weeks</p>
-                        <p class="sml-txt">{{results.hours}} Hours</p>
-                        <p class="sml-txt">{{results.minutes}} Minutes</p>
-                    </div>
-                </div>
-                <div ng-switch-when="false">
-                    <div class="row text-center">
-                        <h2>{{results| date:'mediumDate'}}</h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--------RESULTS DIV END--------->
-
-    </div>
-    <!--------DateCalc DIV END--------->
-
-</body>
+    </body>
 
 
 
-<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
 
-<!-- Angular JS -->
-<script src="js/angular/angular.min.js"></script>
-<script src="js/angular/angular-resource.min.js"></script>
-<script src="js/angular/app.js"></script>
-<script src="js/angular/controllers/list.js"></script>
-<script src="js/angular/factories.js"></script>
-<!-- Angular JS -->
+    <!-- Angular JS -->
+    <script src="js/angular/angular.min.js"></script>
+    <script src="js/angular/angular-resource.min.js"></script>
+    <script src="js/angular/app.js"></script>
+    <script src="js/angular/controllers/list.js"></script>
+    <script src="js/angular/factories.js"></script>
+    <!-- Angular JS -->
 
-<!-- angular UI-->
-<script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
-<script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
-<!-- angular UI-->
+    <!-- angular UI-->
+    <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-date/src/date.js"></script>
+    <!-- angular UI-->
 
 
 </html>
