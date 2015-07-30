@@ -1,7 +1,13 @@
+(function () {
     'use strict';
 
-    var app = angular.module('dateCounter');
-    app.controller('DateCtrl', ['$scope', '$filter', 'OperationTypes', 'numericDateOperation', 'dateDiffrence', function ($scope, $filter, OperationTypes, numericDateOperation, dateDiffrence) {
+    angular
+        .module('dateCounter')
+        .controller('DateCtrl', DateMaker);
+
+    DateMaker.$inject = ['$scope', '$filter', 'OperationTypes', 'numericDateOperation', 'dateDiffrence'];
+
+    function DateMaker($scope, $filter, OperationTypes, numericDateOperation, dateDiffrence) {
 
         $scope.operations = OperationTypes.query();
         $scope.selectedOperation = $scope.operations[0];
@@ -63,4 +69,5 @@
         }
 
 
-	}]);
+    }
+})();
