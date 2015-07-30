@@ -1,0 +1,18 @@
+{
+  "name": "dateMaker",
+  "version": "1.0.0",
+  "dependencies": {},
+  "repository": {},
+  "devDependencies": {
+    "karma": "latest",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  }
+}

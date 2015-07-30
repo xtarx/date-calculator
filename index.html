@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Date Calculator</title>
+        <title>Date Maker</title>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="description" content="Date Calculator">
         <meta name="author" content="XtarX">
@@ -28,7 +28,7 @@
             <!-- INPUT BOX  START -->
             <div class="row">
                 <div class="form-group col-sm-4">
-                    <label for="starting Date">Starting Date (mm/dd/yyyy)</label>
+                    <label for="starting Date">Start Date (mm/dd/yyyy)</label>
                     <input required placeholder="from" class="date form-control ll-skin-nigran" ui-date ui-date-format="dd/mm/yy" ng-model="fromDate" ng-change="dateChange()">
                 </div>
 
@@ -110,6 +110,7 @@
                     </div>
                     <div ng-switch-when="false">
                         <div class="row text-center">
+                            <p>{{$parent.noDays||0}} days, {{$parent.noWeeks||0}} weeks, {{$parent.noMonths||0}} months, {{$parent.noYears||0}} years from {{fromDate}} {{selectedOperation.eng}} on the </p>
                             <h2>{{results| date:'mediumDate'}}</h2>
                         </div>
                     </div>
