@@ -1,7 +1,7 @@
 # DateMaker
 Fast and Beautiful Date calculator powered by Angular JS
-![Screenshot](http://i.imgur.com/9gEHIPu.png)
-![Screenshot](http://i.imgur.com/Ch0sxHF.png)
+![Screenshot](http://i.imgur.com/gCHOIYC.png)
+![Screenshot](http://i.imgur.com/g7OiTz3.png)
 
 ## Demo
 http://xtarx.github.io/date-calculator/
